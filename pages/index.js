@@ -1,21 +1,11 @@
-// Import the <Head> component from Next.js to manage the document head (e.g., title, meta)
-import Head from 'next/head';
+import Head from 'next/head'; // Import the <Head> component from Next.js to manage the document head (e.g., title, meta)
+import Layout, { siteTitle } from '../components/layout'; // Import the default export (Layout component) and a named export (siteTitle) from the layout component
+import utilStyles from '../styles/utils.module.css'; // Import CSS module styles from the utils.module.css file
 
-// Import the default export (Layout component) and a named export (siteTitle) from the layout component
-import Layout, { siteTitle } from '../components/layout';
+import { getSortedPostsData } from '../lib/posts'; // Import a function that reads WP API data from posts.js sorted by date
 
-// Import CSS module styles from the utils.module.css file
-import utilStyles from '../styles/utils.module.css';
+import Link from 'next/link'; // Import the Link component for client-side navigation between routes
 
-// Import a function that reads markdown files from the 'posts' directory,
-// extracts their metadata (like title, date, and id), and returns them sorted by date
-import { getSortedPostsData } from '../lib/posts';
-
-// Import the Link component for client-side navigation between routes
-import Link from 'next/link';
-
-// Import the Date component for formatting and displaying date strings
-import Date from '../components/date';
 
 // getStaticProps runs at build time to fetch data and pass it to the page component as props
 export async function getStaticProps() {
@@ -23,7 +13,7 @@ export async function getStaticProps() {
   return {
     props: {
       allPostsData,
-    },
+    }
   };
 }
 
@@ -36,10 +26,10 @@ export default function Home({ allPostsData }) {
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
-              <Link href={`/posts/${id}`}>{title}</Link>
+              <Link href={`/${id}`}>{title}</Link>
               <br />
               <small className={utilStyles.lightText}>
-                <Date dateString={date} />
+                {date}
               </small>
             </li>
           ))}
