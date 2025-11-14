@@ -28,7 +28,7 @@ export async function getStaticProps({ params }) {
  
 // getStaticPaths tells Next.js which dynamic routes to pre-render at build time
 export async function getStaticPaths() {
-  const paths = getAllPostIds();
+  const paths = await getAllPostIds();
   return {
     paths,
     fallback: false,

@@ -19,7 +19,7 @@ import Date from '../components/date';
 
 // getStaticProps runs at build time to fetch data and pass it to the page component as props
 export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
+  const allPostsData = await getSortedPostsData();
   return {
     props: {
       allPostsData,
